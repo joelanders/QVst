@@ -1,8 +1,9 @@
 # QVst
 
-VST3 plug-ins using Qt 5.
+VST plugins using Qt.
 
-This is a small framework that allows creating VST3 plugins with Qt 5
+This is a small framework that allows creating VST3 plugins with Qt 5.
+Includes VSTi plugin example.
 
 ![Screenshot 1](https://raw.githubusercontent.com/Archie3d/QVst/master/screenshots/vst3_host.png)
 
