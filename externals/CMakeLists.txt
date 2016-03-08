@@ -1,0 +1,1 @@
+add_subdirectory(vst_sdk-3.6.5)
