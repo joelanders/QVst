@@ -9,7 +9,7 @@
 
 
 BEGIN_FACTORY_DEF ("Arthur Benilov",
-                   "https://github.com/Archie3d/qvst",
+                   "https://github.com/Archie3d/QVst",
                    "mailto:arthur.benilov@gmail.com")
 
 	DEF_CLASS2 (INLINE_UID_FROM_FUID(PluginProcessorUID),
