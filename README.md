@@ -2,10 +2,12 @@
 
 VST3 plug-ins using Qt 5.
 
+This is a small framework that allows creating VST3 plugins with Qt 5
+
 ![Screenshot 1](https://raw.githubusercontent.com/Archie3d/QVst/master/screenshots/vst3_host.png)
 
 # Building
-Configure with CMake.
+Configure with CMake. No external dependencies required (except Qt 5).
 
 Compilation tested with MS Windows (Visual C++ 2013), and Qt 5.5.1.
 
