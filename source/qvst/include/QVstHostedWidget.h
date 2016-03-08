@@ -18,16 +18,6 @@ public:
 
     void setVisible(bool visible) override;
 
-protected:
-
-    /*
-    void childEvent(QChildEvent *pEvent) override;
-    bool nativeEvent(const QByteArray &eventType, void *message, long *result) override;
-    void focusInEvent(QFocusEvent *pEvent) override;
-    bool focusNextPrevChild(bool next) override;
-    bool eventFilter(QObject *pObject, QEvent *pEvent) override;
-    */
-
 private:
 
     void adjustSize(const QSize &size);
