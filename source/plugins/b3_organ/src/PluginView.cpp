@@ -69,6 +69,7 @@ QWidget* PluginView::createSlider(const QString &title, int paramId)
     pLabel->setFont(cLabelFont);
     pLabel->setAlignment(Qt::AlignCenter);
     QSlider *pSlider = new QSlider(Qt::Vertical);
+    pSlider->setMinimumHeight(96);
     pSlider->setMinimum(0);
     pSlider->setMaximum(127);
     pSlider->setSingleStep(1);
@@ -96,6 +97,7 @@ QWidget* PluginView::createDial(const QString &title, int paramId, double max)
     pValueLabel->setAlignment(Qt::AlignCenter);
 
     QDial *pDial = new QDial();
+    pDial->setMaximumSize(64, 64);
     pDial->setMinimum(0);
     pDial->setMaximum(100);
     pDial->setSingleStep(1);
