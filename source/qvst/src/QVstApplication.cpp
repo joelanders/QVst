@@ -11,7 +11,7 @@ static HHOOK s_hHook;
 LRESULT CALLBACK msgFilterProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
     if (qApp) {
-        qApp->sendPostedEvents(0, -1);
+        qApp->sendPostedEvents();
     }
     return CallNextHookEx(s_hHook, nCode, wParam, lParam);
 }
@@ -41,7 +41,7 @@ static void msgHandler(QtMsgType type, const QMessageLogContext &contect, const 
     }
 }
 
-QVstApplication* QVstApplication::createInstance(Qt::HANDLE handle)
+QVstApplication* QVstApplication::createInstance(Qt::HANDLE handle, Flags flags)
 {
     QApplication *pGuiApp = qApp;
     if (pGuiApp) {
@@ -49,8 +49,11 @@ QVstApplication* QVstApplication::createInstance(Qt::HANDLE handle)
     }
 
     int argc = 0;
-    QVstApplication *pInstance = new QVstApplication(argc, nullptr, handle);
-    qInstallMessageHandler(msgHandler);
+    QVstApplication *pInstance = new QVstApplication(argc, nullptr, handle, flags);
+    if ((flags & Flag_CreateConsole) != 0) {
+        // Install log messages handler only if there is a console
+        qInstallMessageHandler(msgHandler);
+    }
 
     return pInstance;
 }
@@ -60,15 +63,15 @@ QVstApplication* QVstApplication::instance()
     return static_cast<QVstApplication*>(qApp);
 }
 
-QVstApplication::QVstApplication(int &argc, char **argv, Qt::HANDLE handle)
+QVstApplication::QVstApplication(int &argc, char **argv, Qt::HANDLE handle, Flags flags)
     : QApplication(argc, argv)
 {
     m = new Private;
     m->handle = handle;
     m->pConsole = nullptr;
-#ifdef QVST_CONSOLE
-    m->pConsole = new QVstConsole(this);
-#endif
+    if ((flags & Flag_CreateConsole) != 0) {
+        m->pConsole = new QVstConsole(this);
+    }
 
 #ifdef WIN32
     s_hHook = SetWindowsHookEx(WH_GETMESSAGE, msgFilterProc, 0, GetCurrentThreadId());

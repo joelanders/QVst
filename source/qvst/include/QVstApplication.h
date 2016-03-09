@@ -9,7 +9,12 @@ class QVstApplication : public QApplication
     Q_OBJECT
 public:
 
-    static QVstApplication* createInstance(Qt::HANDLE handle);
+    enum Flags {
+        Flag_None = 0,
+        Flag_CreateConsole = 1
+    };
+
+    static QVstApplication* createInstance(Qt::HANDLE handle, Flags flags = Flag_None);
     static QVstApplication* instance();
 
     ~QVstApplication();
@@ -20,7 +25,7 @@ private:
 
     struct Private;
 
-    QVstApplication(int &argc, char **argv, Qt::HANDLE handle);
+    QVstApplication(int &argc, char **argv, Qt::HANDLE handle, Flags flags = Flag_None);
 
     Private *m;
 };

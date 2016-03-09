@@ -65,7 +65,11 @@ BOOL WINAPI DllMain (HINSTANCE hInst, DWORD dwReason, LPVOID /*lpvReserved*/)
 		}
 
         // Initialize QVst application instance
-        QVstApplication::createInstance(hInst);
+        QVstApplication::Flags flags = QVstApplication::Flag_None;
+#ifdef QVST_CONSOLE
+        flags |= QVstApplication::Flag_CreateConsole;
+#endif
+        QVstApplication::createInstance(hInst, flags);
     } else if (dwReason == DLL_PROCESS_DETACH) {
         // Delete QVst application instance
         delete qApp;
