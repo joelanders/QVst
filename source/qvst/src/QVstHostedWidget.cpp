@@ -51,7 +51,8 @@ void QVstHostedWidget::adjustSize(const QSize &size)
 
     HWND hWnd = reinterpret_cast<HWND>(winId());
     ::SetWindowPos(hWnd, HWND_TOP, 0, 0, size.width(), size.height(), SWP_SHOWWINDOW);
-    setGeometry(rcParent.left, rcParent.top, size.width(), size.height());
+    move(0, 0);
+    resize(size);
     update();
 }
 
