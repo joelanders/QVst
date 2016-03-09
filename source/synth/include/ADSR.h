@@ -49,9 +49,6 @@ private:
     double m_attackRate;
     double m_decayRate;
     double m_releaseRate;
-    double m_releaseLevel;
-
-    unsigned long m_counter;
 };
 
 #endif // SYNTH_ADSR_H

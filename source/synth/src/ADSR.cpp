@@ -9,8 +9,6 @@ ADSR::ADSR()
     setDecayTime(0.1);
     setSustainLevel(0.8);
     setReleaseTime(0.15);
-
-    m_counter = 0;
 }
 
 void ADSR::setAttackTime(double s)
@@ -39,6 +37,9 @@ void ADSR::setReleaseTime(double s)
 
 void ADSR::noteOn()
 {
+    if (!isEnabled()) {
+        setEnabled(true);
+    }
     setState(State_Attack);
 }
 
@@ -52,8 +53,12 @@ double ADSR::tickProcess(double *input, int nChannels)
     (void)input;
     (void)nChannels;
 
-    process();
-    return m_envelope;
+    if (isEnabled()) {
+        process();
+        return m_envelope;
+    }
+
+    return 0.0;
 }
 
 double ADSR::lastSample(int channel) const
@@ -86,18 +91,16 @@ void ADSR::recomputeRates()
 
 void ADSR::process()
 {
-    m_counter++;
-
     switch (m_state) {
     case State_Attack:
-        m_envelope = m_attackRate * m_counter;
+        m_envelope += m_attackRate;
         if (m_envelope >= 1.0) {
             m_envelope = 1.0;
             setState(State_Decay);
         }
         break;
     case State_Decay:
-        m_envelope = 1.0 + (m_decayRate * m_counter);
+        m_envelope += m_decayRate;
         if (m_envelope <= m_sustainLevel) {
             m_envelope = m_sustainLevel;
             setState(State_Sustain);
@@ -107,10 +110,10 @@ void ADSR::process()
         // Just keep the current level
         break;
     case State_Release:
-        m_envelope = m_releaseLevel + m_releaseRate * m_counter;
+        m_envelope += m_releaseRate;
         if (m_envelope <= 0.0) {
             m_envelope = 0.0;
-            setState(State_Off);
+            setEnabled(false);
         }
         break;
     case State_Off:
@@ -121,10 +124,5 @@ void ADSR::process()
 
 void ADSR::setState(State s)
 {
-    if (s == State_Release) {
-        // Capture the current envelope level for the release phase.
-        m_releaseLevel = m_envelope;
-    }
-    m_counter = 0;
     m_state = s;
 }
