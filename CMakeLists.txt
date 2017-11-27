@@ -1,11 +1,11 @@
-cmake_minimum_required(VERSION 2.8.10)
+cmake_minimum_required(VERSION 3.9.0)
 
-if(${CMAKE_MAJOR_VERSION} GREATER 2)
-    cmake_policy(SET CMP0042 OLD)
-    cmake_policy(SET CMP0043 OLD)
-    cmake_policy(SET CMP0054 OLD)
-endif()
-cmake_policy(SET CMP0020 OLD)
+#if(${CMAKE_MAJOR_VERSION} GREATER 2)
+#    cmake_policy(SET CMP0042 OLD)
+#    cmake_policy(SET CMP0043 OLD)
+#    cmake_policy(SET CMP0054 OLD)
+#endif()
+#cmake_policy(SET CMP0020 OLD)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
