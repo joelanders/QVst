@@ -96,7 +96,12 @@ void PluginEffect::parameterChanged(Steinberg::Vst::ParamID id, Steinberg::Vst::
 
 void PluginEffect::noteOn(int number, float velocity)
 {
-    m_organ.noteOn(number, velocity);
+    if (velocity > 0.0f) {
+        m_organ.noteOn(number, velocity);
+    } else {
+        // Treat note-on with zero velocity as note off
+        m_organ.noteOff(number, velocity);
+    }
 }
 
 void PluginEffect::noteOff(int number, float velocity)
