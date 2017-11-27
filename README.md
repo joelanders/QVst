@@ -10,7 +10,7 @@ Includes VSTi plugin example.
 # Building
 Configure with CMake. No external dependencies required (except Qt 5).
 
-Compilation tested with MS Windows (Visual C++ 2013), and Qt 5.5.1.
+Compilation tested with MS Windows (Visual Studio 2017), and Qt 5.9.1.
 
 # Limitations
 This software is work in progress. MS Windows VST3 hosts only.
