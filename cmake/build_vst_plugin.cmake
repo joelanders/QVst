@@ -11,7 +11,7 @@ target_link_libraries(${PROJECT_NAME} ${DEPENDS})
 
 # Plugin DLL interface definitions
 set(CMAKE_SHARED_LINKER_FLAGS 
-    "${CMAKE_SHARED_LINKER_FLAGS} /DEF:${QVST_PLUGIN_DLL_DEF}"
+    "${CMAKE_SHARED_LINKER_FLAGS} -exported_symbols_list:${QVST_PLUGIN_DLL_DEF}"
 )
 
 # Link with dependencies

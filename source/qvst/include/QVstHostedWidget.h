@@ -13,7 +13,7 @@ class QVstHostedWidget : public QWidget
     friend class QVstEditorView;
 public:
 
-    QVstHostedWidget(HWND hParentWnd, QObject *pParent = nullptr, Qt::WindowFlags f = 0);
+    QVstHostedWidget(QObject *pParent = nullptr, Qt::WindowFlags f = 0);
     ~QVstHostedWidget();
 
     void setVisible(bool visible) override;
@@ -26,8 +26,6 @@ private:
     void saveFocus();
     void resetFocus();
 
-    struct Private;
-    Private *m;
 };
 
 #endif // QVSTWIDGET_H

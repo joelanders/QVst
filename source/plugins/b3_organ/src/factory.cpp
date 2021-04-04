@@ -1,5 +1,5 @@
 #include "pluginterfaces/base/funknown.h"
-#include "public.sdk/source/main/pluginfactoryvst3.h"
+#include "public.sdk/source/main/pluginfactory.h"
 #include "ids.h"
 #include "version.h"
 #include "PluginEffect.h"

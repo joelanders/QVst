@@ -26,7 +26,7 @@ void QVstParameterContainer::setValue(const QString &name, double value)
         Steinberg::Vst::ParameterInfo info;
         m_pEditController->getParameterInfo(i, info);
 
-        QString title = QString::fromWCharArray(info.title);
+        QString title = QString::fromWCharArray((const wchar_t *)info.title);
         if (title == name) {
             setValue(info.id, value);
             return;

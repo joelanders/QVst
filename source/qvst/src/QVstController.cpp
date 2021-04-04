@@ -88,7 +88,7 @@ void QVstController::addParameter(Steinberg::Vst::ParamID id, const QString &nam
         wchUnits[units.length()] = 0;
     }
 
-    Steinberg::Vst::Parameter *pParam = parameters.addParameter(wchName, wchUnits, stepCount, defaultValue, 0, id);
+    Steinberg::Vst::Parameter *pParam = parameters.addParameter((const char16_t *)wchName, (const char16_t *)wchUnits, stepCount, defaultValue, 0, id);
 
     if (midiCtrl != 0) {
         m_midiCtrlMap.insert(midiCtrl, pParam->getInfo().id);

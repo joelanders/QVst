@@ -31,7 +31,7 @@ Steinberg::tresult PLUGIN_API QVstEditorView::isPlatformTypeSupported(Steinberg:
 
 Steinberg::tresult PLUGIN_API QVstEditorView::attached(void *parent, Steinberg::FIDString type)
 {
-    m_pHostedWidget = new QVstHostedWidget(reinterpret_cast<HWND>(parent));
+    m_pHostedWidget = new QVstHostedWidget();
     QLayout *pLayout = createLayout();
     if (pLayout != nullptr) {
         m_pHostedWidget->setLayout(pLayout);

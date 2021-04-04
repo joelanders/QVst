@@ -7,6 +7,7 @@ set(${PROJECT_NAME}_INCLUDES "${CMAKE_CURRENT_SOURCE_DIR}/include" CACHE INTERNA
 # Build static library
 add_library(${PROJECT_NAME} ${SRC_CPP} ${SRC_C} ${SRC_H} ${SRC_H_PRIVATE})
 target_link_libraries(${PROJECT_NAME} ${DEPENDS})
+target_link_libraries(${PROJECT_NAME} "-framework CoreFoundation")
 
 # Link with dependencies
 include(link_libs)
