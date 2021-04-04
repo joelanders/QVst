@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 3.9.0)
+set (CMAKE_CXX_STANDARD 17)
+set(CMAKE_PREFIX_PATH "/Users/landers/Qt/5.15.2/clang_64/lib/cmake")
 
 #if(${CMAKE_MAJOR_VERSION} GREATER 2)
 #    cmake_policy(SET CMP0042 OLD)

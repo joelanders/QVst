@@ -22,7 +22,7 @@ public:
 
     ~Instrument()
     {
-        for (std::vector<CVoice*>::iterator it = m_voices.begin();
+        for (typename std::vector<CVoice*>::iterator it = m_voices.begin();
              it != m_voices.end();
              ++it) {
             delete (*it);
@@ -32,7 +32,7 @@ public:
     void setEnabled(bool ena) override
     {
         if (!ena) {
-            for (std::vector<CVoice*>::const_iterator it = m_voices.begin();
+            for (typename std::vector<CVoice*>::const_iterator it = m_voices.begin();
                  it != m_voices.end();
                 ++it) {
                 // Disable the voice
@@ -48,7 +48,7 @@ public:
         (void)nChannels;
 
         double sample = 0.0;
-        for (std::vector<CVoice*>::iterator it = m_voices.begin();
+        for (typename std::vector<CVoice*>::iterator it = m_voices.begin();
              it != m_voices.end();
              ++it) {
             CVoice *pVoice = *it;
@@ -64,7 +64,7 @@ public:
     double lastSample(int channel) const
     {
         double sample = 0.0;
-        for (std::vector<CVoice*>::const_iterator it = m_voices.begin();
+        for (typename std::vector<CVoice*>::const_iterator it = m_voices.begin();
              it != m_voices.end();
              ++it) {
             CVoice *pVoice = *it;
@@ -82,7 +82,7 @@ public:
         CVoice *pVoice = nullptr;
 
         // Look for enabled note
-        std::vector<CVoice*>::const_iterator it = m_voices.begin();
+        typename std::vector<CVoice*>::const_iterator it = m_voices.begin();
         while (pVoice == nullptr && it != m_voices.end()) {
             if ((*it)->isEnabled() && (*it)->noteNumber() == number) {
                 pVoice = *it;
@@ -92,7 +92,7 @@ public:
 
         // Look for first idle voice
         if (pVoice == nullptr) {
-            std::vector<CVoice*>::const_iterator it = m_voices.begin();
+            typename std::vector<CVoice*>::const_iterator it = m_voices.begin();
             while (pVoice == nullptr && it != m_voices.end()) {
                 if (!(*it)->isEnabled()) {
                     pVoice = *it;
@@ -110,7 +110,7 @@ public:
     {
         // Look for the enbaled voice with corresponding note number
         CVoice *pVoice = nullptr;
-        std::vector<CVoice*>::const_iterator it = m_voices.begin();
+        typename std::vector<CVoice*>::const_iterator it = m_voices.begin();
         while (pVoice == nullptr && it != m_voices.end()) {
             if ((*it)->isEnabled() && (*it)->noteNumber() == number) {
                 pVoice = *it;
