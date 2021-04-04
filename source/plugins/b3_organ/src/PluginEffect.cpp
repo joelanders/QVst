@@ -30,13 +30,21 @@ void PluginEffect::processActive(bool state)
 void PluginEffect::processAudio(Steinberg::Vst::ProcessData &data)
 {
     Steinberg::int32 nSamples = data.numSamples;
-    float *pLeft = data.outputs[0].channelBuffers32[0];
-    float *pRight = data.outputs[0].channelBuffers32[1];
+    if (nSamples > 0)
+    {
+        Steinberg::Vst::SpeakerArrangement arr;
+        getBusArrangement (Steinberg::Vst::kOutput, 0, arr);
+        Steinberg::int32 numChannels = Steinberg::Vst::SpeakerArr::getChannelCount (arr);
 
-    for (Steinberg::int32 i = 0; i < nSamples; i++) {
-        m_organ.tick();
-        pLeft[i] = (float)m_organ.lastSample(0) * 0.1;
-        pRight[i] = (float)m_organ.lastSample(1) * 0.1;
+        for (Steinberg::int32 channel = 0; channel < numChannels; channel++)
+        {
+            float *pChannel = data.outputs[0].channelBuffers32[channel];
+
+            for (Steinberg::int32 i = 0; i < nSamples; i++) {
+                m_organ.tick();
+                pChannel[i] = (float)m_organ.lastSample(0) * 0.1;
+            }
+        }
     }
 }
 
